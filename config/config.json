@@ -1,24 +1,17 @@
 {
   "development": {
-    "username": "scraper",
-    "password": "P@ssW0rd!",
-    "database": "mangadb",
-    "host": "db",
-    "dialect": "postgres"
+    "use_env_variable": "DATABASE_URL"
+
   },
   "test": {
-    "username": "scraper",
-    "password": "P@ssW0rd!",
-    "database": "mangadb-test",
+    "username": "me",
+    "password": "password",
+    "database": "api",
     "host": "db",
     "dialect": "postgres"
   },
   "production": {
-    "username": "scraper",
-    "password": "P@ssW0rd!",
-    "database": "mangadb-prod",
-    "host": "db",
-    "dialect": "postgres"
+    "use_env_variable": "DATABASE_URL"
   }
 }
 
