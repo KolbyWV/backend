@@ -1,0 +1,24 @@
+{
+  "development": {
+    "username": "scraper",
+    "password": "P@ssW0rd!",
+    "database": "mangadb",
+    "host": "db",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "scraper",
+    "password": "P@ssW0rd!",
+    "database": "mangadb-test",
+    "host": "db",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "scraper",
+    "password": "P@ssW0rd!",
+    "database": "mangadb-prod",
+    "host": "db",
+    "dialect": "postgres"
+  }
+}
+
