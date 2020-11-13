@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       User.associate = function (models) {
-        User.hasMany(models.Manga, { as: 'mangas'})
+        User.hasMany(models.Manga)
       }
     }
   };
@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
   });
   User.associate = function (models) {
-    User.hasMany(models.Manga, { as: 'mangas'})
+    User.hasMany(models.Manga)
   }
   return User;
 };
