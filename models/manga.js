@@ -9,8 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Manga.associate = function (models) {
-        Manga.belongsTo(models.User, { foreignKey: 'UserId', as: 'user' })
+
     }
   };
   Manga.init({
