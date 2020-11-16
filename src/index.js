@@ -10,7 +10,6 @@ const server = new ApolloServer({
   typeDefs,
   scrape,
   resolvers,
-  context: ({ user }),
   introspection: true,
   playground: true
 })

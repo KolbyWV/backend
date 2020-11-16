@@ -3,7 +3,7 @@ const models = require('../models')
 
 const resolvers = {
     Query: {
-        async me(_, args,{ user }) {
+        async me(_, args,context) {
             return await models.User.findByPk(user.id)
         },
         async user (root, { id }, context) {
@@ -20,15 +20,14 @@ const resolvers = {
                 throw new Error('Something is up with the scrapes, homie')
             }
         },
-        async allMangas (root, args, { user }) {
+        async allMangas (root, args, context) {
             try {
-
                 return models.Manga.findAll({where:{UserId: user.id}})
             } catch (error) {
                 throw new Error('You have not saved any yet!')
             }
         },
-        async manga (root, { id }, { user }) {
+        async manga (root, { id }, context) {
             try {
 
                 return models.Manga.findByPk(id)
