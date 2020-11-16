@@ -10,11 +10,6 @@ const typeDefs = gql`
         mangas: [Manga]
       }
 
-    type AuthPayload {
-        token: String!
-        user: User!
-    }
-
     type Update {
         id: Int!
         title: String!
@@ -30,6 +25,7 @@ const typeDefs = gql`
         id: Int!
         title: String!
         url: String!
+        img: String!
         source: String!
         user: User!
     }
@@ -43,9 +39,9 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        registerUser(name: String!, email: String!, password: String!): AuthPayload!
-        login(email: String!, password: String!): AuthPayload!
-        createManga(UserId: Int!, title: String!, url: String!, source: String!): Manga!
+        registerUser(name: String!, email: String!, password: String!): User!
+        login(email: String!, password: String!): User!
+        createManga(UserId: Int!, title: String!, url: String!, img: String!, source: String!): Manga!
     }
 `
 

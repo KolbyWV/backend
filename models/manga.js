@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   Manga.init({
     title: {type: DataTypes.STRING, allowNull: false,},
     url: {type: DataTypes.STRING, allowNull: false,},
+    img: {type: DataTypes.STRING, allowNull: false,},
     source: {type: DataTypes.STRING, allowNull: false,},
   }, {
     sequelize,

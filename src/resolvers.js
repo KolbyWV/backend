@@ -1,25 +1,20 @@
 const bcrypt = require('bcryptjs')
-const jsonwebtoken = require('jsonwebtoken')
 const models = require('../models')
-require('dotenv').config()
 
 const resolvers = {
     Query: {
         async me(_, args,{ user }) {
-            if(!user) throw new Error('You are not authenticated')
             return await models.User.findByPk(user.id)
         },
-        async user (root, { id }, { user }) {
+        async user (root, { id }, context) {
             try {
-                if(!user) throw new Error('You are not authenticated!')
                 return models.User.findByPk(id)
             } catch (error) {
                 throw new Error(error.message)
             }
         },
-        async allUpdates (root, args, { user }) {
+        async allUpdates (root, args, context) {
             try {
-                if (!user) throw new Error('You are not authenticated!')
                 return models.Update.findAll()
             } catch (error) {
                 throw new Error('Something is up with the scrapes, homie')
@@ -27,7 +22,7 @@ const resolvers = {
         },
         async allMangas (root, args, { user }) {
             try {
-                if (!user) throw new Error('You are not authenticated!')
+
                 return models.Manga.findAll({where:{UserId: user.id}})
             } catch (error) {
                 throw new Error('You have not saved any yet!')
@@ -35,7 +30,7 @@ const resolvers = {
         },
         async manga (root, { id }, { user }) {
             try {
-                if (!user) throw new Error('You are not authenticated!')
+
                 return models.Manga.findByPk(id)
             } catch (error) {
                 throw new Error(error.message)
@@ -50,13 +45,8 @@ const resolvers = {
                   email,
                   password: await bcrypt.hash(password, 10)
                 })
-                const token = jsonwebtoken.sign(
-                  { id: user.id, email: user.email},
-                  process.env.JWT_SECRET,
-                  { expiresIn: '1y' }
-                )
                 return {
-                  token, id: user.id, name: user.name, email: user.email, message: "Authentication successful"
+                  id: user.id, name: user.name, email: user.email, message: "Authentication successful"
                 }
               } catch (error) {
                 throw new Error(error.message)
@@ -72,21 +62,15 @@ const resolvers = {
               if (!isValid) {
                 throw new Error('Incorrect password')
               }
-              // return jwt
-              const token = jsonwebtoken.sign(
-                { id: user.id, email: user.email},
-                process.env.JWT_SECRET,
-                { expiresIn: '1d'}
-              )
               return {
-               token, user
+               user
               }
           } catch (error) {
             throw new Error(error.message)
           }
         },
-        async createManga (root, { UserId, title, url, source }) {
-            return models.Manga.create({ UserId, title, url, source })
+        async createManga (root, { UserId, title, url, img, source }) {
+            return models.Manga.create({ UserId, title, url, img, source })
         }
     },
     User: {
